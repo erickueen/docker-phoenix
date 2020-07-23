@@ -25,4 +25,5 @@ RUN /bin/bash -c "asdf install nodejs 12.18.3"
 RUN /bin/bash -c "asdf global nodejs 12.18.3"
 RUN apt-get install -y inotify-tools
 RUN /bin/bash -c "mix local.hex --force"
+RUN /bin/bash -c "mix local.rebar --force"
 RUN /bin/bash -c "mix archive.install --force hex phx_new 1.5.4"
