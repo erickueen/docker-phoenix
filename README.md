@@ -1,15 +1,22 @@
 # Docker Phoenix
 A docker image based on ubuntu with pre installed erlang, elixir and nodejs.
+
 Everything is installed with asdf and plugins.
 
 Current versions:
+
 **Ubuntu** 20.04
+
 **Elixir** 1.10.4
+
 **Erlang/OTP** 23.0.3
+
 **Phoenix** 1.5.4
+
 **Node** 12.18.3
 
 Dockerize your phoenix project quicly with docker-compose with this image.
+
 Example:
 
 ```yaml
