@@ -3,9 +3,12 @@ LABEL maintainer="hello@erickueen.dev"
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update
 RUN apt install -y curl git
-RUN apt-get -y install build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev openjdk-11-jdk
+RUN apt install -y wget build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev openjdk-11-jdk
 # Add WKHTMLTOPDF
-RUN apt-get install -y wkhtmltopdf
+RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+RUN tar xvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+RUN mv wkhtmltox/bin/wkhtmlto* /usr/bin/
+RUN rm -rf wkhtmltox
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf
 RUN cd ~/.asdf && git checkout "$(git describe --abbrev=0 --tags)"
 ENV PATH /root/.asdf/bin:/root/.asdf/shims:${PATH}
