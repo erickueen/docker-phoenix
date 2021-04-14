@@ -1,10 +1,11 @@
 FROM alpine:3.12
 LABEL maintainer="Erick Reyna <erickueen@resuelve.mx>"
 ARG DEBIAN_FRONTEND=noninteractive
-ENV ERLANG_VERSION=23.0.3
-ENV ELIXIR_COMMIT=1145dc01680aab7094f8a6dbd38b65185e14adb4
-ENV NODE_VERSION=12.18.3
-ENV PHOENIX_VERSION=1.5.4
+ENV ERLANG_VERSION=23.2.7
+# elixir 1.11.3
+ENV ELIXIR_COMMIT=d30c5c0185607f08797441ab8af12636ad8dbd7e
+ENV NODE_VERSION=14.16.0
+ENV PHOENIX_VERSION=1.5.7
 
 RUN \
     apk add --no-cache --update \
@@ -15,6 +16,7 @@ RUN \
       unixodbc-dev \
       zlib-dev curl gcc \
       make automake \
+      libxml2-utils \
       autoconf gnupg nodejs npm
 RUN \
     apk add --no-cache \
@@ -24,6 +26,10 @@ RUN \
       git \
       autoconf \
       build-base \
+      make \
+      automake \
+      autoconf \
+      gcc \
       perl-dev
   RUN apk --no-cache add -U musl musl-dev ncurses-libs libssl1.1 libressl3.1-libcrypto bash \
       qt5-qtwebkit qt5-qtbase-x11 qt5-qtsvg qt5-qtdeclarative qt5-qtsvg qt5-qtbase
@@ -44,7 +50,7 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 RUN touch ~/.bashrc
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-ENV KERL_CONFIGURE_OPTIONS --disable-silent-rules --without-javac --enable-shared-zlib --enable-dynamic-ssl-lib --enable-hipe --enable-sctp --enable-smp-support --enable-threads --enable-kernel-poll --enable-wx --disable-debug --without-javac --enable-darwin-64bit
+ENV KERL_CONFIGURE_OPTIONS --without-debugger --without-observer --disable-silent-rules --without-javac --enable-shared-zlib --enable-dynamic-ssl-lib --enable-hipe --enable-sctp --enable-smp-support --enable-threads --enable-kernel-poll --enable-wx --disable-debug --without-javac --enable-darwin-64bit
 RUN cd ~/.asdf && git checkout "$(git describe --abbrev=0 --tags)"
 ENV PATH /root/.asdf/bin:/root/.asdf/shims:${PATH}
 RUN /bin/bash -c "source ~/.bashrc"
