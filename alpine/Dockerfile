@@ -17,7 +17,8 @@ RUN \
       zlib-dev curl gcc \
       make automake \
       libxml2-utils \
-      autoconf gnupg nodejs npm
+      autoconf gnupg nodejs npm \
+      inotify-tools
 RUN \
     apk add --no-cache \
       dpkg-dev \
