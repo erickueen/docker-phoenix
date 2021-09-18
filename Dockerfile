@@ -1,6 +1,14 @@
 FROM ubuntu:20.04
 LABEL maintainer="hello@erickueen.dev"
 ARG DEBIAN_FRONTEND=noninteractive
+
+ENV ERLANG_VERSION=24.0.6
+# elixir 1.11.3
+ENV ELIXIR_COMMIT=74bfab8ee271e53d24cb0012b5db1e2a931e0470
+ENV NODE_VERSION=14.17.6
+ENV PHOENIX_VERSION=1.5.12
+
+
 RUN apt update
 RUN apt install -y curl git
 RUN apt install -y wget build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev openjdk-11-jdk
@@ -15,20 +23,20 @@ ENV PATH /root/.asdf/bin:/root/.asdf/shims:${PATH}
 RUN /bin/bash -c "source ~/.bashrc"
 RUN /bin/bash -c "asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git"
 ENV KERL_CONFIGURE_OPTIONS --disable-silent-rules --without-javac --enable-shared-zlib --enable-dynamic-ssl-lib --enable-hipe --enable-sctp --enable-smp-support --enable-threads --enable-kernel-poll --enable-wx --disable-debug --without-javac --enable-darwin-64bit
-RUN /bin/bash -c "asdf install erlang 23.0.3"
+RUN /bin/bash -c "asdf install erlang $ERLANG_VERSION"
 RUN apt-get install -y locales && locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 RUN /bin/bash -c "asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git"
-RUN /bin/bash -c "asdf global erlang 23.0.3"
-RUN /bin/bash -c "asdf install elixir ref:1145dc01680aab7094f8a6dbd38b65185e14adb4"
-RUN /bin/bash -c "asdf global elixir ref:1145dc01680aab7094f8a6dbd38b65185e14adb4"
+RUN /bin/bash -c "asdf global erlang $ERLANG_VERSION"
+RUN /bin/bash -c "asdf install elixir ref:$ELIXIR_COMMIT"
+RUN /bin/bash -c "asdf global elixir ref:$ELIXIR_COMMIT"
 RUN /bin/bash -c "asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
 RUN /bin/bash -c "bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'"
-RUN /bin/bash -c "asdf install nodejs 12.18.3"
-RUN /bin/bash -c "asdf global nodejs 12.18.3"
+RUN /bin/bash -c "asdf install nodejs $NODE_VERSION"
+RUN /bin/bash -c "asdf global nodejs $NODE_VERSION"
 RUN apt-get install -y inotify-tools
 RUN /bin/bash -c "mix local.hex --force"
 RUN /bin/bash -c "mix local.rebar --force"
-RUN /bin/bash -c "mix archive.install --force hex phx_new 1.5.4"
+RUN /bin/bash -c "mix archive.install --force hex phx_new $PHOENIX_VERSION"

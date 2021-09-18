@@ -7,13 +7,13 @@ Current versions:
 
 **Ubuntu** 20.04
 
-**Elixir** 1.10.4
+**Elixir** 1.12.3
 
-**Erlang/OTP** 23.0.3
+**Erlang/OTP** 24.0.6
 
-**Phoenix** 1.5.4
+**Phoenix** 1.5.12
 
-**Node** 12.18.3
+**Node** 14.17.6
 
 Dockerize your phoenix project quicly with docker-compose with this image.
 

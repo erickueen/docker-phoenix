@@ -1,11 +1,11 @@
-FROM alpine:3.12
+FROM alpine:3.14
 LABEL maintainer="Erick Reyna <erickueen@resuelve.mx>"
 ARG DEBIAN_FRONTEND=noninteractive
-ENV ERLANG_VERSION=23.2.7
+ENV ERLANG_VERSION=24.0.6
 # elixir 1.11.3
-ENV ELIXIR_COMMIT=d30c5c0185607f08797441ab8af12636ad8dbd7e
-ENV NODE_VERSION=14.16.0
-ENV PHOENIX_VERSION=1.5.7
+ENV ELIXIR_COMMIT=74bfab8ee271e53d24cb0012b5db1e2a931e0470
+ENV NODE_VERSION=14.17.6
+ENV PHOENIX_VERSION=1.5.12
 
 RUN \
     apk add --no-cache --update \
@@ -40,7 +40,7 @@ RUN \
       ttf-freefont \
       fontconfig && \
       apk add --update-cache \
-          --repository http://dl-cdn.alpinelinux.org/alpine/v3.12/community/ \
+          --repository http://dl-cdn.alpinelinux.org/alpine/v3.14/community/ \
           --allow-untrusted \
       wkhtmltopdf && \
       rm -rf /var/cache/apk/* && \
