@@ -10,12 +10,23 @@ ENV PHOENIX_VERSION=1.5.12
 RUN \
     apk add --no-cache --update \
       bash \
-      ca-certificates \
+      build-base \
+      dpkg-dev dpkg \
+      pcre \
       openssl-dev \
       ncurses-dev \
+      zlib-dev \
+      gcc g++ libc-dev \
+      linux-headers \
+      perl-dev \
+      make \
+      autoconf \
       unixodbc-dev \
-      zlib-dev curl gcc \
-      make automake \
+      lksctp-tools-dev \
+      tar \
+      ca-certificates \
+      curl \
+      automake \
       libxml2-utils \
       autoconf gnupg nodejs npm \
       inotify-tools
@@ -32,7 +43,7 @@ RUN \
       autoconf \
       gcc \
       perl-dev
-  RUN apk --no-cache add -U musl musl-dev ncurses-libs libssl1.1 libressl3.1-libcrypto bash \
+  RUN apk --no-cache add -U musl musl-dev ncurses-libs libssl1.1 libressl3.3-libcrypto bash \
       qt5-qtwebkit qt5-qtbase-x11 qt5-qtsvg qt5-qtdeclarative qt5-qtsvg qt5-qtbase
   RUN apk add --update-cache \
       xvfb \
